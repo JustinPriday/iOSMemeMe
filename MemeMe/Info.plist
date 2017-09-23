@@ -21,9 +21,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Testing!!</string>
+	<string>Use Camera for Memes</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Testing!!</string>
+	<string>Use Library Photos for Memes</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>impact.ttf</string>
@@ -36,6 +36,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Add Memes to Photo Library</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

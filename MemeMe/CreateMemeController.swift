@@ -85,6 +85,7 @@ class CreateMemeController: UIViewController, UINavigationControllerDelegate
         controller.completionWithItemsHandler = {(activityType: UIActivityType?, completed:Bool, returnedItems:[Any]?, error: Error?) in
             controller.dismiss(animated: true, completion: nil)
             if (completed) {
+                self.saveMeme()
                 self.memeImage.image = nil
                 self.topTextField.text = ""
                 self.bottomTextField.text = ""
@@ -93,8 +94,6 @@ class CreateMemeController: UIViewController, UINavigationControllerDelegate
             }
         }
         self.present(controller, animated: true, completion: nil)
-
-    
     }
     
     @IBAction func pickAnImage(_ sender: Any) {
@@ -138,6 +137,13 @@ class CreateMemeController: UIViewController, UINavigationControllerDelegate
                 }
             }
         }
+    }
+    
+    func saveMeme() {
+        let meme = MemeImage(original: memeImage.image, topText: topTextField.text!, bottomText: bottomTextField.text!)
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
     }
     
     // MARK: UITextFieldDelegates
