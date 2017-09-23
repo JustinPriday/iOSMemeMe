@@ -43,6 +43,7 @@ class CreateMemeController: UIViewController, UINavigationControllerDelegate
         super.viewDidLoad()
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         
+        //Text Editor setup.
         topTextField.defaultTextAttributes = memeTextAttributes
         topTextField.textAlignment = NSTextAlignment.center
         topTextField.attributedPlaceholder = NSAttributedString(string:"TOP",attributes:memePlaceholderTextAttributes)
@@ -118,6 +119,7 @@ class CreateMemeController: UIViewController, UINavigationControllerDelegate
     // MARK: Class Methods
     
     func updateImageLayout() {
+        //Changes Image View Aspect Ratio to Image Aspect Ratio.
         var aspect:CGFloat = 1.0
         if let imageSize = memeImage.image?.size {
             aspect = (imageSize.width) / (imageSize.height)
@@ -129,6 +131,7 @@ class CreateMemeController: UIViewController, UINavigationControllerDelegate
     }
     
     func checkShareAvailable() {
+        //Enables the share button if there is a meme to share.
         if let shareButton = shareButton {
             shareButton.isEnabled = false
             if (memeImage.image != nil) {
@@ -140,6 +143,7 @@ class CreateMemeController: UIViewController, UINavigationControllerDelegate
     }
     
     func saveMeme() {
+        //Save the meme to a globally available Array.
         let meme = MemeImage(original: memeImage.image, topText: topTextField.text!, bottomText: bottomTextField.text!)
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
@@ -149,6 +153,7 @@ class CreateMemeController: UIViewController, UINavigationControllerDelegate
     // MARK: UITextFieldDelegates
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //Hide the keyboard on return pressed.
         textField.resignFirstResponder()
         return true;
     }
@@ -179,6 +184,8 @@ class CreateMemeController: UIViewController, UINavigationControllerDelegate
     }
     
     @objc func keyboardWillChange(_ notification: NSNotification) {
+        //Keyboard will change more versatile than on hide and on show observers.
+        //This captures keyboard height changes when for instance orientation changes.
         if (getKeyboardRect(notification: notification).origin.y < self.view.frame.height) {
             keyboardHeight.constant = getKeyboardRect(notification: notification).height
         } else {
