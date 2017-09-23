@@ -14,13 +14,13 @@ class CreateMemeController: UIViewController, UINavigationControllerDelegate
     let memeTextAttributes:[String:Any] = [
         NSAttributedStringKey.strokeColor.rawValue: UIColor.black,
         NSAttributedStringKey.foregroundColor.rawValue: UIColor.white,
-        NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+        NSAttributedStringKey.font.rawValue: UIFont(name: "Impact", size: 40)!,
         NSAttributedStringKey.strokeWidth.rawValue: -1]
     
     let memePlaceholderTextAttributes:[NSAttributedStringKey:Any] = [
         .strokeColor: UIColor.black,
         .foregroundColor: UIColor.white,
-        .font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+        .font: UIFont(name: "Impact", size: 40)!,
         .strokeWidth: -1]
     
     @IBOutlet weak var imageContainer: UIView!
@@ -71,8 +71,8 @@ class CreateMemeController: UIViewController, UINavigationControllerDelegate
         imageContainer.layoutSubviews()
         topTextHeightConstraint.constant = (memeImage.frame.size.height * 0.15)
         bottomTextHeightConstraint.constant = (memeImage.frame.size.height * 0.15)
-        topTextField.font = UIFont(name: "HelveticaNeue-CondensedBlack", size: memeImage.frame.size.height * 0.1)!
-        bottomTextField.font = UIFont(name: "HelveticaNeue-CondensedBlack", size: memeImage.frame.size.height * 0.1)!
+        topTextField.font = UIFont(name: "Impact", size: memeImage.frame.size.height * 0.1)!
+        bottomTextField.font = UIFont(name: "Impact", size: memeImage.frame.size.height * 0.1)!
         topTextField.layoutIfNeeded()
         bottomTextField.layoutIfNeeded()
     }

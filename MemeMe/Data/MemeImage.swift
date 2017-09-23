@@ -30,7 +30,7 @@ struct MemeImage {
             let memeAttributes:[NSAttributedStringKey:Any] = [
                 .strokeColor: UIColor.black,
                 .foregroundColor: UIColor.white,
-                .font: UIFont(name: "HelveticaNeue-CondensedBlack", size: (originalImage.size.height * 0.1))!,
+                .font: UIFont(name: "Impact", size: (originalImage.size.height * 0.1))!,
                 .strokeWidth: -1]
             
             drawLabel.textAlignment = NSTextAlignment.center
