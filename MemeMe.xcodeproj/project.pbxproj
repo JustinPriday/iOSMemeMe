@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		FF259E871F77001300EA79C3 /* impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF259E851F76FDC500EA79C3 /* impact.ttf */; };
+		FF259E8B1F77BE6300EA79C3 /* CreateMemeController+ImagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF259E8A1F77BE6300EA79C3 /* CreateMemeController+ImagePickerDelegate.swift */; };
+		FF259E8D1F77BF2000EA79C3 /* CreateMemeController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF259E8C1F77BF2000EA79C3 /* CreateMemeController+Keyboard.swift */; };
 		FF654D151F7550A100D911A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF654D141F7550A100D911A8 /* AppDelegate.swift */; };
 		FF654D171F7550A100D911A8 /* CreateMemeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF654D161F7550A100D911A8 /* CreateMemeController.swift */; };
 		FF654D1A1F7550A100D911A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF654D181F7550A100D911A8 /* Main.storyboard */; };
@@ -31,6 +33,8 @@
 
 /* Begin PBXFileReference section */
 		FF259E851F76FDC500EA79C3 /* impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = impact.ttf; sourceTree = "<group>"; };
+		FF259E8A1F77BE6300EA79C3 /* CreateMemeController+ImagePickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreateMemeController+ImagePickerDelegate.swift"; sourceTree = "<group>"; };
+		FF259E8C1F77BF2000EA79C3 /* CreateMemeController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreateMemeController+Keyboard.swift"; sourceTree = "<group>"; };
 		FF654D111F7550A100D911A8 /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF654D141F7550A100D911A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF654D161F7550A100D911A8 /* CreateMemeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMemeController.swift; sourceTree = "<group>"; };
@@ -95,6 +99,8 @@
 			children = (
 				FF654D141F7550A100D911A8 /* AppDelegate.swift */,
 				FF654D161F7550A100D911A8 /* CreateMemeController.swift */,
+				FF259E8A1F77BE6300EA79C3 /* CreateMemeController+ImagePickerDelegate.swift */,
+				FF259E8C1F77BF2000EA79C3 /* CreateMemeController+Keyboard.swift */,
 				FF654D181F7550A100D911A8 /* Main.storyboard */,
 				FF7525591F76CCB400DFDD88 /* Data */,
 				FF7525541F76AC8B00DFDD88 /* Utilities */,
@@ -236,9 +242,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF259E8B1F77BE6300EA79C3 /* CreateMemeController+ImagePickerDelegate.swift in Sources */,
 				FF654D1D1F7550A100D911A8 /* MemeMe.xcdatamodeld in Sources */,
 				FF654D171F7550A100D911A8 /* CreateMemeController.swift in Sources */,
 				FF75255B1F76CCD700DFDD88 /* MemeImage.swift in Sources */,
+				FF259E8D1F77BF2000EA79C3 /* CreateMemeController+Keyboard.swift in Sources */,
 				FF7525561F76ADCA00DFDD88 /* ConstraintUtils.swift in Sources */,
 				FF654D151F7550A100D911A8 /* AppDelegate.swift in Sources */,
 			);

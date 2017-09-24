@@ -8,8 +8,7 @@
 
 import UIKit
 
-class CreateMemeController: UIViewController, UINavigationControllerDelegate
-    , UIImagePickerControllerDelegate, UITextFieldDelegate {
+class CreateMemeController: UIViewController {
     
     let memeTextAttributes:[String:Any] = [
         NSAttributedStringKey.strokeColor.rawValue: UIColor.black,
@@ -43,15 +42,9 @@ class CreateMemeController: UIViewController, UINavigationControllerDelegate
         super.viewDidLoad()
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         
-        //Text Editor setup.
-        topTextField.defaultTextAttributes = memeTextAttributes
-        topTextField.textAlignment = NSTextAlignment.center
-        topTextField.attributedPlaceholder = NSAttributedString(string:"TOP",attributes:memePlaceholderTextAttributes)
-        topTextField.delegate = self
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.textAlignment = NSTextAlignment.center
-        bottomTextField.attributedPlaceholder = NSAttributedString(string:"BOTTOM",attributes:memePlaceholderTextAttributes)
-        bottomTextField.delegate = self
+        //Text Editor setup. Moved to method following review feedback
+        configure(textField: topTextField, withText: "TOP")
+        configure(textField: bottomTextField, withText: "BOTTOM")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,26 +90,27 @@ class CreateMemeController: UIViewController, UINavigationControllerDelegate
         self.present(controller, animated: true, completion: nil)
     }
     
-    @IBAction func pickAnImage(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.sourceType = .photoLibrary
-        self.present(pickerController, animated: true, completion: nil)
-    }
-    
-    @IBAction func cameraImage(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.sourceType = .camera
-        self.present(pickerController, animated: true, completion: nil)
+    @IBAction func getImageButtonPressed(_ sender: UIBarButtonItem) {
+        if (sender == cameraButton) {
+            captureImage(fromSource: .camera)
+        } else {
+            captureImage(fromSource: .photoLibrary)
+        }
     }
     
     @IBAction func memeTextChanged(_ sender: Any) {
         checkShareAvailable()
     }
     
-    
     // MARK: Class Methods
+    
+    func configure(textField: UITextField, withText: String) {
+        //Configure a text field to be a meme text textfield, takes a place holder text as input
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = NSTextAlignment.center
+        textField.attributedPlaceholder = NSAttributedString(string:withText,attributes:memePlaceholderTextAttributes)
+        textField.delegate = self
+    }
     
     func updateImageLayout() {
         //Changes Image View Aspect Ratio to Image Aspect Ratio.
@@ -144,55 +138,20 @@ class CreateMemeController: UIViewController, UINavigationControllerDelegate
     
     func saveMeme() {
         //Save the meme to a globally available Array.
-        let meme = MemeImage(original: memeImage.image, topText: topTextField.text!, bottomText: bottomTextField.text!)
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        appDelegate.memes.append(meme)
-    }
-    
-    // MARK: UITextFieldDelegates
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //Hide the keyboard on return pressed.
-        textField.resignFirstResponder()
-        return true;
-    }
-    
-    // MARK: UIImagePicker Delegates
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            memeImage.image = image
-            updateImageLayout()
-            checkShareAvailable()
+        if ((memeImage.image != nil) && (topTextField.text != nil) && (bottomTextField.text != nil)
+            && ((topTextField.text!.count > 0) || (bottomTextField.text!.count > 0))) {
+            let meme = MemeImage(original: memeImage.image, topText: topTextField.text!, bottomText: bottomTextField.text!)
+            let object = UIApplication.shared.delegate
+            let appDelegate = object as! AppDelegate
+            appDelegate.memes.append(meme)
         }
-        picker.dismiss(animated: true, completion: nil)
-        print("Got an image")
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        print("User Cancelled")
-        picker.dismiss(animated: true, completion: nil)
-    }
-    
-    // MARK: Notification Selectors with helpers
-    
-    func getKeyboardRect(notification: NSNotification) -> CGRect {
-        let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as!NSValue
-        return keyboardSize.cgRectValue
-    }
-    
-    @objc func keyboardWillChange(_ notification: NSNotification) {
-        //Keyboard will change more versatile than on hide and on show observers.
-        //This captures keyboard height changes when for instance orientation changes.
-        if (getKeyboardRect(notification: notification).origin.y < self.view.frame.height) {
-            keyboardHeight.constant = getKeyboardRect(notification: notification).height
-        } else {
-            keyboardHeight.constant = 0
-        }
-        self.view.setNeedsUpdateConstraints()
-        self.view.layoutIfNeeded()
+    func captureImage(fromSource: UIImagePickerControllerSourceType) {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        pickerController.sourceType = fromSource
+        self.present(pickerController, animated: true, completion: nil)
     }
 
     // MARK: Observer Subscription Managers
@@ -204,7 +163,6 @@ class CreateMemeController: UIViewController, UINavigationControllerDelegate
     func unsubscribeFromNotifications() {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillChangeFrame, object: nil)
     }
-    
-    
+
 }
 
